@@ -3,6 +3,7 @@ package com.company;
 import javax.swing.*;
 
 public class About extends JFrame {
+    // set up the About windows in Help menu: Help -> About.
 
     About() {
         setBounds(100, 100, 500, 400);
