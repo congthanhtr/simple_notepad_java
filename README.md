@@ -1,2 +1,2 @@
-# simple_notepad_java
+# some java project!!!
  A simple notepad app with Java
