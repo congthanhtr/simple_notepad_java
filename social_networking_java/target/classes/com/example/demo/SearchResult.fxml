@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="454.0" prefWidth="764.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.SearchResult">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="419.20001220703125" minWidth="10.0" prefWidth="204.80001220703124" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="567.7999755859375" minWidth="10.0" prefWidth="328.8000122070313" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="567.7999755859375" minWidth="10.0" prefWidth="230.39998779296877" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="146.60001220703126" minHeight="0.0" prefHeight="36.40001106262207" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="364.0" minHeight="10.0" prefHeight="35.80001983642582" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="398.99999237060547" minHeight="10.0" prefHeight="379.7999801635742" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Button fx:id="backBtn" mnemonicParsing="false" onAction="#backOnClicked" text="Back" />
+      <ButtonBar prefHeight="38.0" prefWidth="276.0" GridPane.columnIndex="1">
+        <buttons>
+            <Button fx:id="dashboardBtn" minWidth="31.0" mnemonicParsing="false" onAction="#dashboardOnClicked" prefHeight="26.0" text="Dashboard" />
+          <Button fx:id="messagebtn" mnemonicParsing="false" onAction="#messageOnClicked" text="Message" />
+            <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logoutOnClicked" prefHeight="26.0" prefWidth="122.0" text="Log out" />
+        </buttons>
+      </ButtonBar>
+      <Text fx:id="user_fullnameLab" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, Thành" textAlignment="CENTER" wrappingWidth="254.9367561340332" GridPane.columnIndex="2" />
+      <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#searchOnClicked" text="Search" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <TextField fx:id="searhTxt" prefHeight="26.0" prefWidth="243.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <ListView fx:id="userList" onMouseClicked="#itemOnMouseClicked" prefHeight="183.0" prefWidth="330.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+   </children>
+</GridPane>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="522.0" prefWidth="848.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.DashBoard">
+   <children>
+      <ButtonBar layoutX="203.0" layoutY="14.0" prefHeight="40.0" prefWidth="338.0">
+        <buttons>
+          <Button fx:id="dashboardBtn" mnemonicParsing="false" text="Dashboard" />
+            <Button fx:id="messageBtn" mnemonicParsing="false" text="Message" />
+            <Button fx:id="signoutBtn" mnemonicParsing="false" onAction="#signoutOnClicked" prefHeight="30.0" prefWidth="213.0" text="Sign out" />
+        </buttons>
+      </ButtonBar>
+      <Button fx:id="postBtn" layoutX="628.0" layoutY="88.0" mnemonicParsing="false" onAction="#postBtnOnClicked" prefHeight="30.0" prefWidth="205.0" text="Post FB Status" />
+      <Label fx:id="user_fullnameLabel" alignment="CENTER" layoutX="541.0" layoutY="14.0" prefHeight="40.0" prefWidth="190.0" text="Thành" />
+      <TableView fx:id="statusTable" layoutX="-1.0" layoutY="146.0" prefHeight="379.0" prefWidth="862.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="146.0">
+        <columns>
+          <TableColumn fx:id="userCol" editable="false" prefWidth="148.00000607967377" sortable="false" text="User" />
+            <TableColumn fx:id="timeCol" editable="false" prefWidth="160.79995727539062" sortable="false" text="Time" />
+          <TableColumn fx:id="activityCol" editable="false" minWidth="0.0" prefWidth="202.4000244140625" sortable="false" text="Activity" />
+            <TableColumn fx:id="imageCol" editable="false" prefWidth="335.20001220703125" resizable="false" sortable="false" text="Image" />
+        </columns>
+      </TableView>
+      <TextField fx:id="searchTxt" layoutX="220.0" layoutY="90.0" prefHeight="26.0" prefWidth="320.0" promptText="Search user..." />
+      <Button fx:id="searchBtn" layoutX="541.0" layoutY="88.0" mnemonicParsing="false" onAction="#searchBtnOnClicked" text="Search" />
+   </children>
+</AnchorPane>
