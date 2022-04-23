@@ -1,6 +1,9 @@
 package com.example.crudweb.service.serviceimpl;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Scanner;
 
 import com.example.crudweb.model.Student;
 import com.example.crudweb.repository.StudentRepository;
@@ -45,5 +48,25 @@ public class StudentServiceImpl implements StudentService {
         // TODO Auto-generated method stub
         studentRepository.deleteById(id);
     }
-    
+
+    @Override
+    public void importStudentFromFile(File file) {
+        // TODO Auto-generated method stub
+        try {
+            Scanner scanner = new Scanner(file);
+            scanner.useDelimiter(",");
+            while (scanner.hasNext()) {
+                String firstName = scanner.next();
+                String lastName = scanner.next();
+                String email = scanner.next();
+
+                Student student = new Student(firstName, lastName, email);
+                studentRepository.save(student);
+            }
+            scanner.close();
+        }
+        catch(FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }  
 }

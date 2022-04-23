@@ -3,6 +3,7 @@ package com.example.crudweb.controller;
 import com.example.crudweb.model.Student;
 import com.example.crudweb.service.StudentService;
 
+import java.io.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -68,6 +68,20 @@ public class StudentController {
         existingStudent.setLastName(student.getLastName());
 
         studentService.saveStudent(existingStudent);
+        return "redirect:/";
+    }
+
+    @GetMapping("/students/import")
+    public String getImportStudentForm(Model model) {
+        model.addAttribute("file", new File(""));
+        return "import_student";
+    }
+
+    @PostMapping("/students/import")
+    public String importStudentForm(@ModelAttribute("file") File file) {
+        String filePath = file.getAbsolutePath();
+        File file1 = new File(filePath);
+        studentService.importStudentFromFile(file1);
         return "redirect:/";
     }
 }
