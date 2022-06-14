@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="/src/main/resources/static/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+  </head>
+  <body>
+    <!-- nav bar -->
+    <ul class="nav justify-content-center">
+      <li class="nav-item">
+        <a class="nav-link active" th:href="@{/}">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    <!-- nav bar -->
+
+    <h1
+      th:style="${'text-align: center;'}"
+      th:text="${chapter.chapter_name}"
+    ></h1>
+    
+      <div style="text-align: center;">
+        <form th:action="@{/chapter/{id}(id=${chapter.chapter_id})}+'/edit'">
+          <button type="submit" class="btn btn-primary"><i class="bi bi-pencil-fill"></i>Sửa</button>
+        </form>
+        <!-- <br> -->
+        <form th:action="@{/chapter/{id}(id=${chapter.chapter_id})}+'/delete'" method="post">
+          <button type="submit" class="btn btn-danger"><i class="bi bi-trash-fill"></i>Xóa</button>
+        </form>
+      </div>
+
+      <br>
+
+    <!-- total money -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title" style="font-size: 40px">Tổng thu:</h5>
+              <p
+                class="card-text"
+                id="totalIn"
+                th:style="${'color:green; font-size:1.2em'}"
+                th:text="${#numbers.formatDecimal(chapter.total_in, 0, 'COMMA', 0, 'POINT')} + 'đ'"
+              ></p>
+              <a href="#" class="btn btn-primary">Xem chi tiết</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title" style="font-size: 40px">Tổng chi:</h5>
+              <p
+                class="card-text"
+                th:style="${'color:red; font-size:1.2em'}"
+                th:text="${#numbers.formatDecimal(chapter.total_out, 0, 'COMMA', 0, 'POINT')} + 'đ'"
+              >
+              </p>
+              <a href="#" class="btn btn-primary">Xem chi tiết</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    
+    <!-- total money -->
+
+    <!-- chart -->
+    <div style="text-align: center">
+      <canvas id="myChart" style="width: 100%; max-width: 300px"></canvas>
+    </div>
+
+    <script th:inline="javascript">
+      var xValues = ["Thu", "Chi", ""];
+      var barColors = ["green", "red", ""];
+      /*<![CDATA[*/
+      var chapter = /*[[${chapter}]]*/ "Test";
+      var yValues = [chapter.total_in, chapter.total_out, 0];
+      /*]]>*/
+
+      new Chart("myChart", {
+        type: "pie",
+        data: {
+          labels: xValues,
+          datasets: [
+            {
+              backgroundColor: barColors,
+              data: yValues,
+            },
+          ],
+        },
+        options: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: "Thu/Chi",
+          },
+        },
+      });
+    </script>
+    <!-- chart -->
+
+    <!-- add khoản chi tiêu btn -->
+    <br>
+    <div class="container-fluid">
+      <a
+        th:href="@{/chapter/{id}(id=${chapter.chapter_id})}  + '/new'"
+        class="btn btn-primary"
+        >Thêm khoản thu/chi</a
+      >
+    </div>
+    <br />
+    <!-- add khoản chi tiêu btn -->
+
+    <!-- money record -->
+
+    <!-- tag chi -->
+    <div class="container-fluid">
+      <div class="row">
+        <!-- tag thu -->
+        <div class="col-sm-6" th:each="money:${moneyIn}">
+          <div class="card">
+            <div class="card-body">
+              <h5
+                class="card-title"
+                th:style="${'font-size:25px; color:green'}"
+                th:text="'+' + ${#numbers.formatDecimal(money.amount_in, 0, 'COMMA', 0, 'POINT')} + 'đ'"
+              ></h5>
+              <p class="card-text" th:text="${money.description}"></p>
+              <button
+                type="button"
+                class="btn btn-primary"
+                th:text="${money.category.category_name}"
+              >
+                Profile <span class="badge badge-light"></span>
+                <span class="sr-only">unread messages</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- tag chi -->
+        <div class="col-sm-6" th:each="monei:${moneyOut}">
+          <div class="card">
+            <div class="card-body">
+              <h5
+                class="card-title"
+                th:style="${'font-size:25px; color:red'}"
+                th:text="'-' + ${#numbers.formatDecimal(monei.amount_out, 0, 'COMMA', 0, 'POINT')} + 'đ'"
+              ></h5>
+              <p class="card-text" th:text="${monei.description}"></p>
+              <button
+                type="button"
+                class="btn btn-danger"
+                th:text="${monei.category.category_name}"
+              >
+                Profile <span class="badge badge-light"></span>
+                <span class="sr-only">unread messages</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- money record  -->
+  </body>
+</html>
