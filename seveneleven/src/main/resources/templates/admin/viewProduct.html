@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <!-- bootstrap-icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
+  </head>
+  <body th:if="${admin.role=='ADMIN'}">
+    <!-- nav bar -->
+    <ul class="nav justify-content-center navbar-dark bg-dark">
+      <li class="nav-item">
+        <h3>
+          <a
+          class="nav-link active"
+          th:href="@{/user/{userId}(userId=${admin.userId})}"
+          >7Eleven</a
+        >
+        </h3>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          th:href="@{/user/{userId}(userId=${admin.userId})} + '/cart/'"
+          >Giỏ hàng</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          th:href="@{/user/{userId}(userId=${admin.userId})} + '/order/'"
+          >Đơn hàng</a
+        >
+      </li>
+      <li th:if="${admin.role=='ADMIN'}" class="nav-item">
+        <a
+          class="nav-link"
+          th:href="@{/admin/{userId}(userId=${admin.userId})} + '/'"
+          >Giao diện quản lý</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:text="${'Đăng xuất, ' + {admin.username}}" th:href="@{/logout}">Đăng xuất</a>
+      </li>
+    </ul>
+    <!-- nav bar -->  
+    <h1>CHI TIẾT SẢN PHẨM</h1>
+
+    <!-- show product -->
+    <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-4 col-md-6" th:each="product:${products}">
+        <form method="post" th:action="${'/user/' + {user.userId} + '/cart/add/' + {product.productId}}">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title" th:text="${product.productName}"></h5>
+            <p class="card-text" th:text="${product.productDescription}"></p>
+            <p class="card-text" th:text="'Giá bán: ' + ${#numbers.formatDecimal(product.productPrice, 0, 'COMMA', 0, 'POINT')} + 'đ'"></p>
+            <input name="quantity" th:value="1" type="number" min="0" class="form-control">
+            <br>
+            <button class="btn btn-primary" type="submit">Thêm vào giỏ hàng</button>
+          </div>
+        </div>
+        </form> 
+      </div>
+    </div>
+    </div>
+    <script>
+      document.getElementsByName("quantity").defaultValue = "1";
+    </script>
+    <!-- show product -->
+
+    <!-- show detail -->
+    <div class="card text-center">
+        <div class="card-header">
+          <i class="bi bi-search"></i> Chi tiết sản phẩm
+        </div>
+        <div class="card-body">
+            <img class="card-img-top" src="" alt="Card image cap">
+          <h5 class="card-title" th:text="${product.productName}"></h5>
+          <p class="card-text" th:text="${product.productDescription}"></p>
+          <h3 th:text="${#numbers.formatDecimal(product.productPrice, 0, 'COMMA', 0, 'POINT')} + 'đ'"></h3>
+        </div>
+        <div class="card-footer text-muted">
+            <a th:href="${'/admin/' + {admin.userId} + '/product/' + {product.productId}} + '/edit'" class="btn btn-info"><i class="bi bi-pencil-square"></i> Sửa sản phẩm</a>
+            <a th:href="${'/admin/' + {admin.userId} + '/product/' + {product.productId}} + '/delete'" class="btn btn-danger"><i class="bi bi-trash"></i> Xóa sản phẩm</a>
+        </div>
+      </div>
+    <!-- show detail -->
+
+  </body>
+</html>

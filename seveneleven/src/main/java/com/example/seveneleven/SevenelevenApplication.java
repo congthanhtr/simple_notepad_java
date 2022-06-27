@@ -1,14 +1,13 @@
-package com.example.paymanagement;
+package com.example.seveneleven;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PaymanagementApplication {
+public class SevenelevenApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PaymanagementApplication.class, args);
+		SpringApplication.run(SevenelevenApplication.class, args);
 	}
 
 }
-	

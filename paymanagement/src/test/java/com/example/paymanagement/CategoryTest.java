@@ -27,7 +27,7 @@ public class CategoryTest {
         Category test = categoryRepository.save(chapter);
 
 
-        Assertions.assertThat(test).isNotNull();
+        Assertions.assertThat(test).isNotNull();    
     }
 
     @Test

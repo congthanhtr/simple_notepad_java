@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <!-- bootstrap-icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <!-- nav bar -->
+    <ul class="nav justify-content-center navbar-dark bg-dark">
+      <li class="nav-item">
+        <h3>
+          <a
+          class="nav-link active"
+          th:href="@{/user/{userId}(userId=${user.userId})}"
+          >7Eleven</a
+        >
+        </h3>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          th:href="@{/user/{userId}(userId=${user.userId})} + '/cart/'"
+          >Giỏ hàng</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          th:href="@{/user/{userId}(userId=${user.userId})} + '/order/'"
+          >Đơn hàng</a
+        >
+      </li>
+      <li th:if="${user.role=='ADMIN'}" class="nav-item">
+        <a
+          class="nav-link"
+          th:href="@{/admin/{userId}(userId=${user.userId})} + '/'"
+          >Giao diện quản lý</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:text="${'Đăng xuất, ' + {user.username}}" th:href="@{/logout}">Đăng xuất</a>
+      </li>
+    </ul>
+    <!-- nav bar -->
+    <h1>TRANG CHỦ</h1>
+
+    <!-- add kế hoạch chi tiêu btn -->
+    <div th:switch="${user.role}" class="container-fluid">
+      <div th:case="'ADMIN'">
+        <a
+          th:href="@{/admin/{adminId}(adminId=${user.userId})}+'/product/add'"
+          class="btn btn-success"
+          ><i class="bi bi-plus-square"></i> Thêm sản phẩm</a
+        >
+        <a
+          th:href="@{/user/{userId}(userId=${user.userId})} + '/cart/'"
+          class="btn btn-primary"
+          ><i class="bi bi-cart3"></i> Giỏ hàng</a
+        >
+        <a
+          th:href="@{/user/{userId}(userId=${user.userId})} + '/order/'"
+          class="btn btn-primary"
+          ><i class="bi bi-file-check"></i> Đơn hàng</a
+        >
+      </div>
+      <div th:case="'USER'">
+        <a
+          th:href="@{/user/{userId}(userId=${user.userId})} + '/cart/'"
+          class="btn btn-primary"
+          ><i class="bi bi-cart3"></i> Giỏ hàng</a
+        >
+        <a
+          th:href="@{/user/{userId}(userId=${user.userId})} + '/order/'"
+          class="btn btn-primary"
+          ><i class="bi bi-file-check"></i> Đơn hàng</a
+        >
+      </div>
+    </div>
+    <br />
+    <!-- add kế hoạch chi tiêu btn -->
+
+    <!-- show product -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-4 col-md-6" th:each="product:${products}">
+          <form
+            method="post"
+            th:action="${'/user/' + {user.userId} + '/cart/add/' + {product.productId}}"
+          >
+            <div class="card mb-3" style="width: 18rem">
+              <div class="card-body">
+                <a
+                  th:href="${'/user/' + {user.userId} + '/product/' + {product.productId}}"
+                  ><h5 class="card-title" th:text="${product.productName}"></h5
+                ></a>
+                <p
+                  class="card-text"
+                  th:text="${product.productDescription}"
+                ></p>
+                <p
+                  class="card-text"
+                  th:text="'Giá bán: ' + ${#numbers.formatDecimal(product.productPrice, 0, 'COMMA', 0, 'POINT')} + 'đ'"
+                ></p>
+                <input
+                  name="quantity"
+                  th:value="1"
+                  type="number"
+                  min="1"
+                  class="form-control"
+                />
+                <br />
+                <button class="btn btn-primary" type="submit">
+                  <i class="bi bi-cart-plus">Thêm vào giỏ hàng</i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.getElementsByName("quantity").defaultValue = "1";
+    </script>
+    <!-- show product -->
+  </body>
+</html>

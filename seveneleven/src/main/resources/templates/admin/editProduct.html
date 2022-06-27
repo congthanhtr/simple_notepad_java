@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <!-- bootstrap-icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
+  </head>
+  <body th:if="${admin.role=='ADMIN'}">
+    <!-- nav bar -->
+    <ul class="nav justify-content-center navbar-dark bg-dark">
+      <li class="nav-item">
+        <h3>
+          <a
+          class="nav-link active"
+          th:href="@{/user/{userId}(userId=${admin.userId})}"
+          >7Eleven</a
+        >
+        </h3>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          th:href="@{/user/{userId}(userId=${admin.userId})} + '/cart/'"
+          >Giỏ hàng</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          th:href="@{/user/{userId}(userId=${admin.userId})} + '/order/'"
+          >Đơn hàng</a
+        >
+      </li>
+      <li th:if="${admin.role=='ADMIN'}" class="nav-item">
+        <a
+          class="nav-link"
+          th:href="@{/admin/{userId}(userId=${admin.userId})} + '/'"
+          >Giao diện quản lý</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:text="${'Đăng xuất, ' + {admin.username}}" th:href="@{/logout}">Đăng xuất</a>
+      </li>
+    </ul>
+    <!-- nav bar -->  
+    <h1>Thêm sản phẩm lên sàn</h1>
+    <!-- FORM -->
+    <div class="container-fluid">
+        <form th:action="${'/admin/' + {admin.userId} + '/product/' + {product.productId} + '/edit'}" method="post" th:object="${product}">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Tên sản phẩm</label>
+              <input th:field="${product.productName}" style="max-width: 50%;" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <div class="form-group">
+              <label for="exampleInputPassword1">Miêu tả</label>
+              <input th:field="${product.productDescription}" style="max-width: 50%;" type="text" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Giá cả</label>
+              <input data-type="currency" th:field="${product.productPrice}" style="max-width: 50%;" value="0" type="number" class="form-control" id="exampleInputPassword1">
+            </div>
+            <button type="submit" class="btn btn-primary">Xác nhận</button>
+          </form>
+    </div>
+    <!-- FORM -->
+  </body>
+</html>

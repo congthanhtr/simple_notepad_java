@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin=" anonymous"
+    />
+    <!-- bootstrap-icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
+  </head>
+  <body>
+    <!-- nav bar -->
+    <ul class="nav justify-content-center navbar-dark bg-dark">
+      <li class="nav-item">
+        <h3>
+          <a
+          class="nav-link active"
+          th:href="@{/user/{userId}(userId=${user.userId})}"
+          >7Eleven</a
+        >
+        </h3>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          th:href="@{/user/{userId}(userId=${user.userId})} + '/cart/'"
+          >Giỏ hàng</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          th:href="@{/user/{userId}(userId=${user.userId})} + '/order/'"
+          >Đơn hàng</a
+        >
+      </li>
+      <li th:if="${user.role=='ADMIN'}" class="nav-item">
+        <a
+          class="nav-link"
+          th:href="@{/admin/{userId}(userId=${user.userId})} + '/'"
+          >Giao diện quản lý</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:text="${'Đăng xuất, ' + {user.username}}" th:href="@{/logout}">Đăng xuất</a>
+      </li>
+    </ul>
+    <!-- nav bar -->
+    <h1>XEM ĐƠN HÀNG</h1>
+
+    <!-- add kế hoạch chi tiêu btn -->
+    <br>
+    <br>
+    <!-- add kế hoạch chi tiêu btn -->
+
+    <!-- show table -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Tên sản phẩm</th>
+          <th scope="col">Số lượng</th>
+          <th scope="col">Thành tiền</th>
+          <th scope="col">Người đặt</th>
+          <th scope="col">Số điện thoại</th>
+          <th scope="col">Địa chỉ</th>
+          <th scope="col">Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="order: ${orders}">
+          <td class="count"></td>
+          <td th:text="${order.product.productName}"></td>
+          <td th:text="${order.quantity}"></td>
+          <td th:text="${#numbers.formatDecimal(order.product.productPrice*order.quantity, 0, 'COMMA', 0, 'POINT')} + 'đ'"></td>
+          <td th:text="${order.myUser.username}"></td>
+          <td th:text="${order.myUser.phone}"></td>
+          <td th:text="${order.myUser.address}"></td>
+          <td>
+            <a th:href="${'/user/' + {user.userId} + '/order/' + {order.orderId}} + '/delete'" class="btn btn-danger"><i class="bi bi-file-earmark-excel"></i> Hủy đơn</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <script>
+      var list = document.getElementsByClassName("count");
+      for (var i = 0; i <= list.length; i++) {
+          list[i].innerHTML = i+1;
+      }
+    </script>
+    <!-- show table -->
+  </body>
+</html>
