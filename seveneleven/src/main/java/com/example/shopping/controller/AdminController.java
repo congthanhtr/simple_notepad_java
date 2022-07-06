@@ -1,4 +1,4 @@
-package com.example.seveneleven.controller;
+package com.example.shopping.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.seveneleven.model.Product;
-import com.example.seveneleven.service.MyUserService;
-import com.example.seveneleven.service.OrderService;
-import com.example.seveneleven.service.ProductService;
+import com.example.shopping.model.Product;
+import com.example.shopping.service.MyUserService;
+import com.example.shopping.service.OrderService;
+import com.example.shopping.service.ProductService;
 
 @Controller
 @RequestMapping("/admin")

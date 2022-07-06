@@ -1,12 +1,12 @@
-package com.example.seveneleven.service;
+package com.example.shopping.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.seveneleven.model.MyUser;
-import com.example.seveneleven.repository.MyUserRepository;
+import com.example.shopping.model.MyUser;
+import com.example.shopping.repository.MyUserRepository;
 
 @Service
 public class MyUserService {

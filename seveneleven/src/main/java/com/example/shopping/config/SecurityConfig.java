@@ -1,4 +1,4 @@
-package com.example.seveneleven.config;
+package com.example.shopping.config;
 
 import java.io.IOException;
 
@@ -17,8 +17,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import com.example.seveneleven.model.MyUser;
-import com.example.seveneleven.service.MyUserService;
+import com.example.shopping.model.MyUser;
+import com.example.shopping.service.MyUserService;
 
 @Configuration
 @EnableWebSecurity

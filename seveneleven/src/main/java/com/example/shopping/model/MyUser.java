@@ -1,4 +1,4 @@
-package com.example.seveneleven.model;
+package com.example.shopping.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

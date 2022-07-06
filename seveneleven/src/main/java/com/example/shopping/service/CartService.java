@@ -1,15 +1,15 @@
-package com.example.seveneleven.service;
+package com.example.shopping.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.seveneleven.model.Cart;
-import com.example.seveneleven.model.MyUser;
-import com.example.seveneleven.model.Order;
-import com.example.seveneleven.model.Product;
-import com.example.seveneleven.repository.CartRepository;
+import com.example.shopping.model.Cart;
+import com.example.shopping.model.MyUser;
+import com.example.shopping.model.Order;
+import com.example.shopping.model.Product;
+import com.example.shopping.repository.CartRepository;
 
 @Service
 public class CartService {

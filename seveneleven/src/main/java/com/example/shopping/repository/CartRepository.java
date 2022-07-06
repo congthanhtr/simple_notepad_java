@@ -1,4 +1,4 @@
-package com.example.seveneleven.repository;
+package com.example.shopping.repository;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.seveneleven.model.Cart;
+import com.example.shopping.model.Cart;
 
 @Repository
 public interface CartRepository extends CrudRepository<Cart, Long> {

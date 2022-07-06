@@ -8,9 +8,9 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
-import com.example.seveneleven.model.Cart;
-import com.example.seveneleven.model.MyUser;
-import com.example.seveneleven.repository.MyUserRepository;
+import com.example.shopping.model.Cart;
+import com.example.shopping.model.MyUser;
+import com.example.shopping.repository.MyUserRepository;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)

@@ -1,4 +1,4 @@
-package com.example.seveneleven.repository;
+package com.example.shopping.repository;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.example.seveneleven.model.Order;
+import com.example.shopping.model.Order;
 
 @Repository
 public interface OrderRepository extends CrudRepository<Order,Long> {

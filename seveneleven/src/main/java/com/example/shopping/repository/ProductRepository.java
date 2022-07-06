@@ -1,9 +1,9 @@
-package com.example.seveneleven.repository;
+package com.example.shopping.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.seveneleven.model.Product;
+import com.example.shopping.model.Product;
 
 @Repository
 public interface ProductRepository extends CrudRepository<Product,Long> {
